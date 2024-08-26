@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "Spaghetti Bolognese",
+    "category": "Main Course",
+    "isVegetarian": false,
+    "ingredients": ["Spaghetti", "Ground Beef", "Tomato Sauce", "Onion", "Garlic", "Carrot", "Celery", "Olive Oil", "Salt", "Pepper", "Parmesan Cheese"],
+    "instructions": "1. Cook the spaghetti in a large pot of boiling salted water until al dente, following the package instructions. Drain and set aside.\n2. Heat olive oil in a large pan over medium heat. Add chopped onions, garlic, carrots, and celery. Sauté until softened.\n3. Add ground beef to the pan and cook until browned. Stir in the tomato sauce and bring to a simmer.\n4. Season with salt and pepper. Let the sauce simmer for 15-20 minutes, stirring occasionally.\n5. Serve the sauce over the cooked spaghetti. Top with freshly grated Parmesan cheese and enjoy!",
+    "cookingTime": "45 minutes",
+    "isSaved": false,
+    "imageResId": "sp_carbonara"
+  },
+  {
+    "id": 2,
+    "name": "Vegetable Stir Fry",
+    "category": "Snack",
+    "isVegetarian": true,
+    "ingredients": ["Broccoli", "Bell Peppers", "Carrots", "Snap Peas", "Soy Sauce", "Ginger", "Garlic", "Olive Oil", "Salt", "Pepper"],
+    "instructions": "1. Heat olive oil in a large wok or skillet over medium-high heat.\n2. Add minced garlic and ginger, and sauté until fragrant.\n3. Add the vegetables (broccoli, bell peppers, carrots, snap peas) and stir-fry for 5-7 minutes until they are tender-crisp.\n4. Pour in the soy sauce and stir to coat the vegetables evenly.\n5. Season with salt and pepper to taste. Serve hot, optionally over steamed rice.",
+    "cookingTime": "25 minutes",
+    "isSaved": true,
+    "imageResId": "chicken_alfredo"
+  }
+]
