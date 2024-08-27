@@ -33,8 +33,8 @@ class RecipeViewModelTest {
     private lateinit var viewModel: RecipeViewModel
     private val testDispatcher = StandardTestDispatcher() // This is the dispatcher that test coroutines will use
     val recipes = listOf(
-        Recipe(1, "Spaghetti Bolognese", "Main Course", false, listOf("Spaghetti", "Ground Beef", "Tomato Sauce"), "Cook spaghetti. Prepare sauce. Combine and serve.", false, "", "", ""),
-        Recipe(2, "Vegetable Stir Fry", "Snack", true, listOf("Broccoli", "Bell Peppers", "Soy Sauce"), "Stir fry vegetables. Add sauce. Serve with rice.", true, "", "", "")
+        Recipe(1, "Spaghetti Bolognese", "Main Course", false, listOf("Spaghetti", "Ground Beef", "Tomato Sauce"), "Cook spaghetti. Prepare sauce. Combine and serve.", "", true, "", ""),
+        Recipe(2, "Vegetable Stir Fry", "Snack", true, listOf("Broccoli", "Bell Peppers", "Soy Sauce"), "Stir fry vegetables. Add sauce. Serve with rice.", "", true, "", "")
     )
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
@@ -97,7 +97,7 @@ class RecipeViewModelTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `test save recipe`() = runTest {
-        val recipe = Recipe(3, "New Recipe", "Dessert", true, listOf("Sugar", "Flour"), "Mix ingredients and bake.", true, "", "", "")
+        val recipe = Recipe(3, "New Recipe", "Dessert", true, listOf("Sugar", "Flour"), "Mix ingredients and bake.", "", true, "", "")
         viewModel.saveRecipe(recipe)
         advanceUntilIdle()
         coVerify(exactly = 1) { repository.saveRecipe(recipe) }

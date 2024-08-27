@@ -73,9 +73,6 @@ dependencies {
     testImplementation (libs.mockito.core)
     testImplementation (libs.mockito.inline)
 
-    // ROOM
-//    implementation(libs.androidx.room.ktx)
-//    kapt (libs.androidx.room.compiler)
 
     // For coroutine testing
 //    testImplementation (libs.kotlinx.coroutines.test)

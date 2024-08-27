@@ -8,7 +8,8 @@
     "instructions": "1. Cook the spaghetti in a large pot of boiling salted water until al dente, following the package instructions. Drain and set aside.\n2. Heat olive oil in a large pan over medium heat. Add chopped onions, garlic, carrots, and celery. Sauté until softened.\n3. Add ground beef to the pan and cook until browned. Stir in the tomato sauce and bring to a simmer.\n4. Season with salt and pepper. Let the sauce simmer for 15-20 minutes, stirring occasionally.\n5. Serve the sauce over the cooked spaghetti. Top with freshly grated Parmesan cheese and enjoy!",
     "cookingTime": "45 minutes",
     "isSaved": false,
-    "imageResId": "sp_carbonara"
+    "imageResId": "r1",
+    "description": "A classic Italian pasta dish with a rich and savory meat sauce."
   },
   {
     "id": 2,
@@ -19,6 +20,163 @@
     "instructions": "1. Heat olive oil in a large wok or skillet over medium-high heat.\n2. Add minced garlic and ginger, and sauté until fragrant.\n3. Add the vegetables (broccoli, bell peppers, carrots, snap peas) and stir-fry for 5-7 minutes until they are tender-crisp.\n4. Pour in the soy sauce and stir to coat the vegetables evenly.\n5. Season with salt and pepper to taste. Serve hot, optionally over steamed rice.",
     "cookingTime": "25 minutes",
     "isSaved": true,
-    "imageResId": "chicken_alfredo"
+    "imageResId": "r2",
+    "description": "A colorful and nutritious stir-fry with fresh vegetables and a savory soy sauce."
+  },
+  {
+    "id": 3,
+    "name": "Chicken Alfredo",
+    "category": "Main Course",
+    "isVegetarian": false,
+    "ingredients": ["Fettuccine", "Chicken Breast", "Heavy Cream", "Parmesan Cheese", "Butter", "Garlic", "Salt", "Pepper", "Parsley"],
+    "instructions": "1. Cook fettuccine according to package instructions. Drain and set aside.\n2. Heat butter in a large skillet over medium heat. Add minced garlic and cook until fragrant.\n3. Add diced chicken breast and cook until no longer pink.\n4. Pour in heavy cream and bring to a simmer. Stir in Parmesan cheese until melted and smooth.\n5. Season with salt and pepper. Toss in cooked fettuccine and mix well. Garnish with parsley before serving.",
+    "cookingTime": "35 minutes",
+    "isSaved": false,
+    "imageResId": "r3",
+    "description": "Creamy Alfredo sauce with tender chicken and fettuccine pasta."
+  },
+  {
+    "id": 4,
+    "name": "Chocolate Lava Cake",
+    "category": "Dessert",
+    "isVegetarian": true,
+    "ingredients": ["Dark Chocolate", "Butter", "Sugar", "Eggs", "Flour", "Vanilla Extract", "Powdered Sugar"],
+    "instructions": "1. Preheat oven to 425°F (220°C). Grease and flour four ramekins.\n2. Melt dark chocolate and butter in a microwave-safe bowl. Stir until smooth.\n3. In a separate bowl, whisk together sugar, eggs, and vanilla extract until well combined.\n4. Fold in the melted chocolate mixture, then add flour and mix gently.\n5. Divide the batter among the ramekins and bake for 12-14 minutes until the edges are set but the center is still soft.\n6. Let cool for 1 minute before inverting onto plates. Dust with powdered sugar and serve warm.",
+    "cookingTime": "20 minutes",
+    "isSaved": true,
+    "imageResId": "r4",
+    "description": "Decadent chocolate cake with a gooey molten center."
+  },
+  {
+    "id": 5,
+    "name": "Greek Salad",
+    "category": "Snack",
+    "isVegetarian": true,
+    "ingredients": ["Cucumbers", "Tomatoes", "Red Onion", "Olives", "Feta Cheese", "Olive Oil", "Lemon Juice", "Oregano", "Salt", "Pepper"],
+    "instructions": "1. Cut cucumbers, tomatoes, and red onion into bite-sized pieces.\n2. Combine in a large bowl with olives and crumbled feta cheese.\n3. In a small bowl, whisk together olive oil, lemon juice, oregano, salt, and pepper.\n4. Pour the dressing over the salad and toss to combine. Serve immediately or chill before serving.",
+    "cookingTime": "15 minutes",
+    "isSaved": false,
+    "imageResId": "r5",
+    "description": "A refreshing salad with cucumbers, tomatoes, feta, and a tangy dressing."
+  },
+  {
+    "id": 6,
+    "name": "Beef Tacos",
+    "category": "Main Course",
+    "isVegetarian": false,
+    "ingredients": ["Ground Beef", "Taco Seasoning", "Taco Shells", "Lettuce", "Tomatoes", "Cheddar Cheese", "Sour Cream", "Salsa"],
+    "instructions": "1. Cook ground beef in a skillet over medium heat until browned. Drain excess fat.\n2. Add taco seasoning and a little water to the beef, stirring until well coated.\n3. Heat taco shells according to package instructions.\n4. Fill each taco shell with seasoned beef and top with lettuce, diced tomatoes, cheddar cheese, sour cream, and salsa as desired.",
+    "cookingTime": "20 minutes",
+    "isSaved": true,
+    "imageResId": "r6",
+    "description": "Classic beef tacos with all the favorite toppings."
+  },
+  {
+    "id": 7,
+    "name": "Grilled Salmon",
+    "category": "Main Course",
+    "isVegetarian": false,
+    "ingredients": ["Salmon Fillets", "Lemon", "Garlic", "Olive Oil", "Salt", "Pepper", "Fresh Dill"],
+    "instructions": "1. Preheat the grill to medium-high heat.\n2. Season salmon fillets with olive oil, minced garlic, salt, and pepper.\n3. Place salmon on the grill and cook for about 4-6 minutes per side, or until the fish flakes easily with a fork.\n4. Squeeze fresh lemon juice over the salmon and garnish with fresh dill before serving.",
+    "cookingTime": "15 minutes",
+    "isSaved": true,
+    "imageResId": "r7",
+    "description": "Deliciously seasoned grilled salmon with a hint of lemon and fresh dill."
+  },
+  {
+    "id": 8,
+    "name": "Quinoa Salad",
+    "category": "Snack",
+    "isVegetarian": true,
+    "ingredients": ["Quinoa", "Cucumbers", "Cherry Tomatoes", "Red Onion", "Feta Cheese", "Olive Oil", "Lemon Juice", "Salt", "Pepper"],
+    "instructions": "1. Cook quinoa according to package instructions and let it cool.\n2. In a large bowl, combine cooked quinoa with chopped cucumbers, cherry tomatoes, red onion, and crumbled feta cheese.\n3. In a small bowl, whisk together olive oil, lemon juice, salt, and pepper.\n4. Pour the dressing over the salad and toss to combine. Serve chilled or at room temperature.",
+    "cookingTime": "20 minutes",
+    "isSaved": false,
+    "imageResId": "r8",
+    "description": "A refreshing salad featuring protein-rich quinoa and fresh vegetables."
+  },
+  {
+    "id": 9,
+    "name": "Lemon Meringue Pie",
+    "category": "Dessert",
+    "isVegetarian": true,
+    "ingredients": ["Pie Crust", "Egg Yolks", "Sugar", "Cornstarch", "Lemon Juice", "Butter", "Egg Whites", "Cream of Tartar"],
+    "instructions": "1. Preheat oven to 350°F (175°C).\n2. Bake the pie crust until golden brown and set aside.\n3. In a saucepan, combine sugar, cornstarch, and water. Cook over medium heat until thickened.\n4. Remove from heat and stir in lemon juice and butter.\n5. Beat egg yolks and temper with some of the hot mixture, then combine with the rest of the mixture and return to heat.\n6. Pour filling into the baked crust.\n7. Beat egg whites with cream of tartar until stiff peaks form, then spread over the filling.\n8. Bake for an additional 10-15 minutes, until meringue is golden brown. Cool before serving.",
+    "cookingTime": "1 hour",
+    "isSaved": false,
+    "imageResId": "r9",
+    "description": "A tangy and sweet lemon pie topped with a fluffy meringue."
+  },
+  {
+    "id": 10,
+    "name": "Caesar Salad",
+    "category": "Snack",
+    "isVegetarian": false,
+    "ingredients": ["Romaine Lettuce", "Croutons", "Parmesan Cheese", "Caesar Dressing", "Chicken Breast"],
+    "instructions": "1. Grill or cook the chicken breast until fully cooked, then slice into strips.\n2. In a large bowl, toss romaine lettuce with Caesar dressing until evenly coated.\n3. Add croutons and Parmesan cheese, and toss again.\n4. Top with grilled chicken strips and serve immediately.",
+    "cookingTime": "20 minutes",
+    "isSaved": true,
+    "imageResId": "r10",
+    "description": "A classic Caesar salad with crisp romaine lettuce, croutons, Parmesan cheese, and grilled chicken."
+  },
+  {
+    "id": 11,
+    "name": "Apple Crisp",
+    "category": "Dessert",
+    "isVegetarian": true,
+    "ingredients": ["Apples", "Brown Sugar", "Oats", "Butter", "Flour", "Cinnamon", "Nutmeg"],
+    "instructions": "1. Preheat oven to 350°F (175°C).\n2. Peel, core, and slice apples and place them in a baking dish.\n3. In a bowl, combine brown sugar, oats, flour, cinnamon, and nutmeg. Cut in butter until the mixture resembles coarse crumbs.\n4. Sprinkle the topping evenly over the apples.\n5. Bake for 40-45 minutes, until the topping is golden and the apples are tender. Serve warm with ice cream if desired.",
+    "cookingTime": "50 minutes",
+    "isSaved": true,
+    "imageResId": "r11",
+    "description": "Warm baked apples with a buttery, crispy oat topping."
+  },
+  {
+    "id": 12,
+    "name": "Vegetarian Chili",
+    "category": "Main Course",
+    "isVegetarian": true,
+    "ingredients": ["Kidney Beans", "Black Beans", "Corn", "Tomato Sauce", "Bell Peppers", "Onion", "Garlic", "Cumin", "Chili Powder", "Olive Oil"],
+    "instructions": "1. Heat olive oil in a large pot over medium heat. Sauté chopped onions, garlic, and bell peppers until softened.\n2. Add beans, corn, tomato sauce, cumin, and chili powder. Stir to combine.\n3. Bring to a boil, then reduce heat and let simmer for 30 minutes, stirring occasionally.\n4. Adjust seasoning to taste and serve hot.",
+    "cookingTime": "40 minutes",
+    "isSaved": false,
+    "imageResId": "r12",
+    "description": "Hearty and spicy chili packed with beans, corn, and vegetables."
+  },
+  {
+    "id": 13,
+    "name": "Pancakes",
+    "category": "Breakfast",
+    "isVegetarian": true,
+    "ingredients": ["Flour", "Milk", "Eggs", "Sugar", "Baking Powder", "Salt", "Butter", "Maple Syrup"],
+    "instructions": "1. In a bowl, whisk together flour, sugar, baking powder, and salt.\n2. In another bowl, mix milk, eggs, and melted butter.\n3. Combine wet and dry ingredients until smooth.\n4. Heat a pan over medium heat and pour batter to form pancakes.\n5. Cook until bubbles form, then flip and cook until golden.\n6. Serve with butter and maple syrup.",
+    "cookingTime": "20 minutes",
+    "isSaved": false,
+    "imageResId": "r13",
+    "description": "Fluffy and golden pancakes, perfect for a hearty breakfast."
+  },
+  {
+    "id": 14,
+    "name": "Omelette",
+    "category": "Breakfast",
+    "isVegetarian": true,
+    "ingredients": ["Eggs", "Milk", "Salt", "Pepper", "Butter", "Cheese", "Bell Peppers", "Onions"],
+    "instructions": "1. In a bowl, beat eggs with milk, salt, and pepper.\n2. Heat butter in a pan over medium heat.\n3. Pour the egg mixture into the pan and let it cook for a few minutes.\n4. Add cheese, bell peppers, and onions to one half of the omelette.\n5. Fold the omelette in half and cook until the cheese melts.\n6. Serve hot.",
+    "cookingTime": "15 minutes",
+    "isSaved": false,
+    "imageResId": "r14",
+    "description": "A quick and easy omelette with a delicious mix of cheese and vegetables."
+  },
+  {
+    "id": 15,
+    "name": "Avocado Toast",
+    "category": "Breakfast",
+    "isVegetarian": true,
+    "ingredients": ["Bread", "Avocado", "Lemon Juice", "Salt", "Pepper", "Olive Oil", "Cherry Tomatoes"],
+    "instructions": "1. Toast the bread slices until golden and crisp.\n2. In a bowl, mash the avocado with lemon juice, salt, and pepper.\n3. Spread the avocado mixture on the toasted bread.\n4. Drizzle with olive oil and top with sliced cherry tomatoes.\n5. Serve immediately.",
+    "cookingTime": "10 minutes",
+    "isSaved": false,
+    "imageResId": "r15",
+    "description": "Simple and tasty avocado toast with a hint of lemon and topped with cherry tomatoes."
   }
 ]

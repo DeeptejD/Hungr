@@ -85,8 +85,8 @@ class RecipeRepositoryImplTest {
                 instructions = "Boil pasta. Mix with sauce. Add cheese and serve.",
                 isSaved = false,
                 imageResId = "pasta_image",
-                description = "A classic pasta dish with rich tomato sauce.",
-                cookingTime = "20 minutes"
+                cookingTime = "20 minutes",
+                description = "A classic pasta dish with rich tomato sauce."
             ),
             Recipe(
                 id = 2,
@@ -97,8 +97,8 @@ class RecipeRepositoryImplTest {
                 instructions = "Stir-fry vegetables. Add sauce and serve with rice.",
                 isSaved = true,
                 imageResId = "stir_fry_image",
-                description = "A quick and tasty vegetable stir-fry.",
-                cookingTime = "15 minutes"
+                cookingTime = "15 minutes",
+                description = "A quick and tasty vegetable stir-fry."
             )
         )
         val recipesFlow = repository.getAllRecipes()
@@ -120,8 +120,8 @@ class RecipeRepositoryImplTest {
             instructions = "Boil pasta. Mix with sauce. Add cheese and serve.",
             isSaved = false,
             imageResId = "pasta_image",
-            description = "A classic pasta dish with rich tomato sauce.",
-            cookingTime = "20 minutes"
+            cookingTime = "20 minutes",
+            description = "A classic pasta dish with rich tomato sauce."
         )
         val recipeFlow = repository.getRecipeById(1)
         val recipe = recipeFlow.first()
@@ -142,8 +142,8 @@ class RecipeRepositoryImplTest {
             instructions = "Boil pasta. Mix with sauce. Add cheese and serve.",
             isSaved = false,
             imageResId = "pasta_image",
-            description = "A classic pasta dish with rich tomato sauce.",
-            cookingTime = "20 minutes"
+            cookingTime = "20 minutes",
+            description = "A classic pasta dish with rich tomato sauce."
         )
         repository.saveRecipe(recipe)
         assertEquals(true, recipe.isSaved)

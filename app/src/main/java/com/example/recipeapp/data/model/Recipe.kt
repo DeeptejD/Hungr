@@ -10,4 +10,5 @@ data class Recipe(
     val cookingTime: String,
     var isSaved: Boolean = false,
     val imageResId: String,
+    val description: String
 )

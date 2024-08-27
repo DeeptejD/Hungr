@@ -1,5 +1,10 @@
 package com.example.recipeapp.ui.screens
 
+import android.content.Intent
+import android.speech.RecognizerIntent
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,11 +21,15 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.rounded.Face
 import androidx.compose.material3.ElevatedFilterChip
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -34,6 +43,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -50,7 +61,7 @@ fun HomeScreen(
     viewModel: RecipeViewModel,
     isSearchActive: Boolean,
     onSearchActiveChange: (Boolean) -> Unit // This just toggles the isSearchActive parameter
-) {
+    ) {
     val categories = listOf("All", "Dessert", "Main Course", "Snack")
 
     val selectedCategory = viewModel.selectedCategory.collectAsState().value
@@ -58,9 +69,29 @@ fun HomeScreen(
     val searchQuery by viewModel.searchQuery.collectAsState()
 
     val recipes = viewModel.recipes.collectAsState(initial = emptyList()).value
-
+    val context = LocalContext.current
     // instance of the greeting object to change the greeting dynamically
     val greeting = Greeting()
+
+    // Remember speech recognition launcher
+    val speechRecognizerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        var spokenText = result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
+        if (spokenText=="desert" || spokenText=="Desert") {
+            // If the test is misspelt into desert it resets it and shows a toast
+            spokenText="dessert"
+            Toast.makeText(context, "Did you mean dessert?", Toast.LENGTH_SHORT).show()
+        }
+        spokenText?.let { spokenCategory ->
+            val matchingCategory = categories.find { it.equals(spokenCategory, ignoreCase = true) }
+            if (matchingCategory != null) {
+                viewModel.onCategorySelected(if (matchingCategory == "All") null else matchingCategory)
+            } else {
+                Toast.makeText(context, "Category not recognized", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -79,9 +110,24 @@ fun HomeScreen(
                     // switches from a cancel to a search icon
                     Icon(if (isSearchActive) Icons.Default.Close else Icons.Default.Search, contentDescription = "Search")
                 }
-            },
-                modifier = Modifier.padding(10.dp))
+            }, modifier = Modifier.padding(10.dp))
         },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                        putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+                        putExtra(RecognizerIntent.EXTRA_PROMPT, "Say a category")
+                    }
+                    speechRecognizerLauncher.launch(intent)
+                },
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = Color.White
+            ) {
+                Icon(painter = painterResource(id = R.drawable.mic), contentDescription = "Speak")
+            }
+        },
+        floatingActionButtonPosition = FabPosition.End
     ) { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
             // Displays the greeting message
@@ -100,17 +146,17 @@ fun HomeScreen(
                     onValueChange = {
                         viewModel.onSearchQueryChanged(it)
                     },
-                    placeholder = { Text("Let him cook...") },
+                    placeholder = { Text("What are you craving for?") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp),
                     shape = RoundedCornerShape(50.dp),
                     colors = TextFieldDefaults.textFieldColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        focusedIndicatorColor = Color.Transparent,  // Removes the bottom line when focused
-                        unfocusedIndicatorColor = Color.Transparent,  // Removes the bottom line when unfocused
-                        disabledIndicatorColor = Color.Transparent,  // Removes the bottom line when disabled
-                        errorIndicatorColor = Color.Transparent  // Removes the bottom line when there's an error
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        disabledIndicatorColor = Color.Transparent,
+                        errorIndicatorColor = Color.Transparent
                     ),
                     leadingIcon = {
                         Icon(Icons.Filled.Search, contentDescription = "Search", Modifier.padding(start = 20.dp))

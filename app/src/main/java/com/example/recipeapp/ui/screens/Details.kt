@@ -130,6 +130,12 @@ fun RecipeDetailsScreen(navController: NavController, recipe: Recipe) {
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = recipe.description,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Spacer(modifier = Modifier.height(8.dp))
 
             Text(text = "Ingredients:", style = MaterialTheme.typography.titleMedium)
             Spacer(modifier = Modifier.height(4.dp))
