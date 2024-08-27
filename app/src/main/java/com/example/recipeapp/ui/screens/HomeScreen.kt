@@ -146,15 +146,15 @@ fun HomeScreen(
             }
         }
     }
-    val requestPermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            startSpeechRecognition(speechRecognizerLauncher)
-        } else {
-            Toast.makeText(context, "Microphone permission denied", Toast.LENGTH_SHORT).show()
-        }
-    }
+//    val requestPermissionLauncher = rememberLauncherForActivityResult(
+//        contract = ActivityResultContracts.RequestPermission()
+//    ) { isGranted: Boolean ->
+//        if (isGranted) {
+//            startSpeechRecognition(speechRecognizerLauncher)
+//        } else {
+//            Toast.makeText(context, "Microphone permission denied", Toast.LENGTH_SHORT).show()
+//        }
+//    }
     Scaffold(
         topBar = {
             TopAppBar(title = {
@@ -177,14 +177,19 @@ fun HomeScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    when {
-                        ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED -> {
-                            startSpeechRecognition(speechRecognizerLauncher)
-                        }
-                        else -> {
-                            requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
-                        }
+//                    when {
+//                        ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED -> {
+//                            startSpeechRecognition(speechRecognizerLauncher)
+//                        }
+//                        else -> {
+//                            requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+//                        }
+//                    }
+                    val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                        putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+                        putExtra(RecognizerIntent.EXTRA_PROMPT, "Say \"Search\" followed by a dish name, or simply mention a category!")
                     }
+                    speechRecognizerLauncher.launch(intent)
                 },
                 containerColor = Color(0xFFFF6A16),
                 contentColor = Color.White
@@ -294,12 +299,3 @@ fun HomeScreen(
         }
     }
 }
-
-private fun startSpeechRecognition(speechRecognizerLauncher: ManagedActivityResultLauncher<Intent, ActivityResult>) {
-    val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-        putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-        putExtra(RecognizerIntent.EXTRA_PROMPT, "Say \"Search\" followed by a dish name, or simply mention a category!")
-    }
-    speechRecognizerLauncher.launch(intent)
-}
-
