@@ -1,7 +1,6 @@
 package com.example.recipeapp
 
 import com.example.recipeapp.data.model.Recipe
-import com.example.recipeapp.data.model.RecipeEntity
 import com.example.recipeapp.repository.RecipeRepositoryImpl
 import com.example.recipeapp.viewmodel.RecipeViewModel
 import io.mockk.coVerify
@@ -34,8 +33,8 @@ class RecipeViewModelTest {
     private lateinit var viewModel: RecipeViewModel
     private val testDispatcher = StandardTestDispatcher() // This is the dispatcher that test coroutines will use
     val recipes = listOf(
-        RecipeEntity(1, "Spaghetti Bolognese", "Main Course", false, listOf("Spaghetti", "Ground Beef", "Tomato Sauce"), "Cook spaghetti. Prepare sauce. Combine and serve.", "25 minutes", false, "spaghetti"),
-        RecipeEntity(2, "Vegetable Stir Fry", "Snack", true, listOf("Broccoli", "Bell Peppers", "Soy Sauce"), "Stir fry vegetables. Add sauce. Serve with rice.", "30 minutes", true, "vegetable_stir_fry")
+        Recipe(1, "Spaghetti Bolognese", "Main Course", false, listOf("Spaghetti", "Ground Beef", "Tomato Sauce"), "Cook spaghetti. Prepare sauce. Combine and serve.", false, "", "", ""),
+        Recipe(2, "Vegetable Stir Fry", "Snack", true, listOf("Broccoli", "Bell Peppers", "Soy Sauce"), "Stir fry vegetables. Add sauce. Serve with rice.", true, "", "", "")
     )
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
@@ -98,10 +97,10 @@ class RecipeViewModelTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `test save recipe`() = runTest {
-        val recipe = RecipeEntity(3, "New Recipe", "Dessert", true, listOf("Sugar", "Flour"), "Mix ingredients and bake.", "25 minutes", false, "new_recipe")
+        val recipe = Recipe(3, "New Recipe", "Dessert", true, listOf("Sugar", "Flour"), "Mix ingredients and bake.", true, "", "", "")
         viewModel.saveRecipe(recipe)
         advanceUntilIdle()
-        coVerify(exactly = 1) { repository.updateRecipe(recipe) }
+        coVerify(exactly = 1) { repository.saveRecipe(recipe) }
     }
 
     @Test
