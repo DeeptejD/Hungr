@@ -62,7 +62,7 @@ fun HomeScreen(
     isSearchActive: Boolean,
     onSearchActiveChange: (Boolean) -> Unit // This just toggles the isSearchActive parameter
     ) {
-    val categories = listOf("All", "Dessert", "Main Course", "Snack")
+    val categories = listOf("All", "Breakfast", "Main Course",  "Dessert", "Snack")
 
     val selectedCategory = viewModel.selectedCategory.collectAsState().value
     val isVegetarianFilter = viewModel.isVegetarianFilter.collectAsState().value
@@ -78,21 +78,73 @@ fun HomeScreen(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
         var spokenText = result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
-        if (spokenText=="desert" || spokenText=="Desert") {
-            // If the test is misspelt into desert it resets it and shows a toast
-            spokenText="dessert"
-            Toast.makeText(context, "Did you mean dessert?", Toast.LENGTH_SHORT).show()
-        }
-        spokenText?.let { spokenCategory ->
-            val matchingCategory = categories.find { it.equals(spokenCategory, ignoreCase = true) }
-            if (matchingCategory != null) {
-                viewModel.onCategorySelected(if (matchingCategory == "All") null else matchingCategory)
-            } else {
-                Toast.makeText(context, "Category not recognized", Toast.LENGTH_SHORT).show()
+
+        if (spokenText != null) {
+            if (spokenText.equals("desert", ignoreCase = true)) {
+                spokenText = "dessert"
+            }
+            when {
+                spokenText.equals("non veg", ignoreCase = true) || spokenText.equals("nonveg", ignoreCase = true) -> {
+                    viewModel.onSearchQueryChanged("")
+                    viewModel.onVegetarianFilterSelected(false)
+                }
+                spokenText.equals("veg", ignoreCase = true) -> {
+                    viewModel.onSearchQueryChanged("")
+                    viewModel.onVegetarianFilterSelected(true)
+                }
+                spokenText.equals("favourite", ignoreCase = true) || spokenText.equals("favorites", ignoreCase = true) || spokenText.equals("favourites", ignoreCase = true) || spokenText.equals("favorite", ignoreCase = true) -> {
+                    navController.navigate("favorites") {
+                        popUpTo(navController.graph.startDestinationId) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
+                    viewModel.onCategorySelected(null)
+                    viewModel.onSearchQueryChanged("")
+                }
+
+                categories.any { it.equals(spokenText, ignoreCase = true) } -> {
+                    val matchingCategory = categories.find { it.equals(spokenText, ignoreCase = true) }
+                    viewModel.onCategorySelected(if (matchingCategory == "All") null else matchingCategory)
+                    // Reset vege and search query
+                    if (matchingCategory == "All") {
+                        Toast.makeText(context, "Showing all recipes", Toast.LENGTH_SHORT).show()
+                        viewModel.onVegetarianFilterSelected(null)
+                        viewModel.onSearchQueryChanged("")
+                    }
+                }
+
+                spokenText.startsWith("search", ignoreCase = true) -> {
+                    val dishName = spokenText.removePrefix("search").trim()
+                    if (dishName.isNotEmpty()) {
+                        if(dishName.equals("all", ignoreCase = true)) {
+                            viewModel.onCategorySelected(null)
+                            viewModel.onSearchQueryChanged("")
+                            Toast.makeText(context, "Showing all recipes", Toast.LENGTH_SHORT).show()
+                        }
+                        else if (dishName.equals("veg", ignoreCase = true)) {
+                            viewModel.onCategorySelected(null)
+                            viewModel.onSearchQueryChanged("")
+                            viewModel.onVegetarianFilterSelected(true)
+                        } else if (dishName.equals("non veg", ignoreCase = true) || dishName.equals("nonveg", ignoreCase = true)) {
+                            viewModel.onCategorySelected(null)
+                            viewModel.onSearchQueryChanged("")
+                            viewModel.onVegetarianFilterSelected(false)
+                        }
+                        else {
+                            viewModel.onSearchQueryChanged(dishName)
+                            Toast.makeText(context, "Showing recipes that match with, $dishName", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(context, "Please specify a dish name", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                else -> {
+                    Toast.makeText(context, "Say \"Search\" followed by the name of the dish", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
-
     Scaffold(
         topBar = {
             TopAppBar(title = {
@@ -117,7 +169,7 @@ fun HomeScreen(
                 onClick = {
                     val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
                         putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-                        putExtra(RecognizerIntent.EXTRA_PROMPT, "Say a category")
+                        putExtra(RecognizerIntent.EXTRA_PROMPT, "Say \"Search\" followed by a dish name, or simply mention a category!")
                     }
                     speechRecognizerLauncher.launch(intent)
                 },
@@ -201,6 +253,7 @@ fun HomeScreen(
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
+
                     items(categories) { category ->
                         ElevatedFilterChip(
                             selected = selectedCategory == category,

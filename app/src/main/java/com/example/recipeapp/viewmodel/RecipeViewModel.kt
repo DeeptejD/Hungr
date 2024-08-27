@@ -42,8 +42,9 @@ class RecipeViewModel(private val repository: RecipeRepositoryImpl) : ViewModel(
     }.flatMapLatest { (category, query, isVegetarian) ->
         repository.getAllRecipes().map { list ->
             list.filter { recipe ->
+                val queryWords = query.split(" ").filter { it.isNotBlank() }
                 (category == null || recipe.category == category) &&
-                (query.isBlank() || recipe.name.contains(query, ignoreCase = true)) &&
+                (query.isBlank() || queryWords.any { recipe.name.contains(it, ignoreCase = true) }) &&
                 (isVegetarian == null || recipe.isVegetarian == isVegetarian)
             }
         }

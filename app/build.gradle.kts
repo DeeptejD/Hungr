@@ -73,16 +73,15 @@ dependencies {
     testImplementation (libs.mockito.core)
     testImplementation (libs.mockito.inline)
 
+//    androidTestImplementation ("androidx.compose.ui:ui-test-junit4:1.9.0")
+//    androidTestImplementation ("androidx.compose.ui:ui-test-manifest:1.9.0")
 
-    // For coroutine testing
-//    testImplementation (libs.kotlinx.coroutines.test)
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.0")
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
-//    androidTestImplementation(libs.mockk.android)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
