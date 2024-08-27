@@ -1,6 +1,7 @@
 package com.example.recipeapp
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.AssetManager
 import com.example.recipeapp.data.model.Recipe
 import com.example.recipeapp.repository.RecipeRepositoryImpl
@@ -16,14 +17,24 @@ class RecipeRepositoryImplTest {
     private lateinit var context: Context
     private lateinit var repository: RecipeRepositoryImpl
     private lateinit var assetManager: AssetManager
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     @Before
     fun setUp() {
         context = mock(Context::class.java)
         assetManager = mock(AssetManager::class.java)
+        sharedPreferences = mock(SharedPreferences::class.java)
+        editor = mock(SharedPreferences.Editor::class.java)
+
+
 
         // Stub assets method from context to return the mock asset manager
         `when`(context.assets).thenReturn(assetManager)
+        `when`(context.getSharedPreferences("SavedRecipePrefs", Context.MODE_PRIVATE)).thenReturn(sharedPreferences)
+        `when`(sharedPreferences.edit()).thenReturn(editor)
+        `when`(sharedPreferences.getBoolean("SAVED_RECIPE_1", false)).thenReturn(false)
+        `when`(sharedPreferences.getBoolean("SAVED_RECIPE_2", false)).thenReturn(true)
 
         val json = """
         [
