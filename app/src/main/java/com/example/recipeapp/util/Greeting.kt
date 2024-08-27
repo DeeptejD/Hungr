@@ -3,8 +3,8 @@ package com.example.recipeapp.util
 import java.util.Calendar
 
 class Greeting {
-    public fun getGreetingMessage(): String {
-        val calendar = Calendar.getInstance()
+    public fun getGreetingMessage(calendar: Calendar): String {
+//        val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
 
         return when (hour) {

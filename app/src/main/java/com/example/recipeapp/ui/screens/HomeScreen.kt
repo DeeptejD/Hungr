@@ -85,8 +85,9 @@ fun HomeScreen(
     ) { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
             // Displays the greeting message
+            val calendar = java.util.Calendar.getInstance()
             Text(
-                text = greeting.getGreetingMessage(),
+                text = greeting.getGreetingMessage(calendar),
                 style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier.padding(16.dp),
                 fontWeight = FontWeight.Bold

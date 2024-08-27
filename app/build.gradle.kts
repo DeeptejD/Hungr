@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -50,7 +51,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -73,6 +73,10 @@ dependencies {
     testImplementation (libs.mockito.core)
     testImplementation (libs.mockito.inline)
 
+    // ROOM
+    implementation(libs.androidx.room.ktx)
+    kapt (libs.androidx.room.compiler)
+
     // For coroutine testing
 //    testImplementation (libs.kotlinx.coroutines.test)
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.0")
@@ -81,6 +85,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.mockk.android)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
