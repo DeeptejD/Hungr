@@ -6,8 +6,12 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -17,7 +21,19 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.*
+import androidx.compose.material3.ElevatedFilterChip
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -148,7 +164,7 @@ fun Favorites(
                     }
                     speechRecognizerLauncher.launch(intent)
                 },
-                containerColor = MaterialTheme.colorScheme.primary,
+                containerColor = Color(0xFFFF6A16),
                 contentColor = Color.White
             ) {
                 Icon(painter = painterResource(id = R.drawable.mic), contentDescription = "Speak")
@@ -175,7 +191,7 @@ fun Favorites(
                         .padding(8.dp),
                     shape = RoundedCornerShape(50.dp),
                     colors = TextFieldDefaults.textFieldColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        containerColor = Color(0xFFFFCEB3),
                         focusedIndicatorColor = Color.Transparent,  // Removes the bottom line when focused
                         unfocusedIndicatorColor = Color.Transparent,  // Removes the bottom line when unfocused
                         disabledIndicatorColor = Color.Transparent,  // Removes the bottom line when disabled

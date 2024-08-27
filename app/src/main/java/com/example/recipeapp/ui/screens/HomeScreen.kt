@@ -1,15 +1,18 @@
 package com.example.recipeapp.ui.screens
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.speech.RecognizerIntent
 import android.widget.Toast
+import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,9 +24,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.rounded.Face
 import androidx.compose.material3.ElevatedFilterChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
@@ -43,11 +44,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.example.recipeapp.R
 import com.example.recipeapp.ui.components.RecipeCard
@@ -145,6 +146,15 @@ fun HomeScreen(
             }
         }
     }
+    val requestPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            startSpeechRecognition(speechRecognizerLauncher)
+        } else {
+            Toast.makeText(context, "Microphone permission denied", Toast.LENGTH_SHORT).show()
+        }
+    }
     Scaffold(
         topBar = {
             TopAppBar(title = {
@@ -167,13 +177,16 @@ fun HomeScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-                        putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-                        putExtra(RecognizerIntent.EXTRA_PROMPT, "Say \"Search\" followed by a dish name, or simply mention a category!")
+                    when {
+                        ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED -> {
+                            startSpeechRecognition(speechRecognizerLauncher)
+                        }
+                        else -> {
+                            requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                        }
                     }
-                    speechRecognizerLauncher.launch(intent)
                 },
-                containerColor = MaterialTheme.colorScheme.primary,
+                containerColor = Color(0xFFFF6A16),
                 contentColor = Color.White
             ) {
                 Icon(painter = painterResource(id = R.drawable.mic), contentDescription = "Speak")
@@ -204,7 +217,7 @@ fun HomeScreen(
                         .padding(8.dp),
                     shape = RoundedCornerShape(50.dp),
                     colors = TextFieldDefaults.textFieldColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        containerColor = Color(0xFFFFCEB3),
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         disabledIndicatorColor = Color.Transparent,
@@ -282,4 +295,11 @@ fun HomeScreen(
     }
 }
 
+private fun startSpeechRecognition(speechRecognizerLauncher: ManagedActivityResultLauncher<Intent, ActivityResult>) {
+    val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+        putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+        putExtra(RecognizerIntent.EXTRA_PROMPT, "Say \"Search\" followed by a dish name, or simply mention a category!")
+    }
+    speechRecognizerLauncher.launch(intent)
+}
 

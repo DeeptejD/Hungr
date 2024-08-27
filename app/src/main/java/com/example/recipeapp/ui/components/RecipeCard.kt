@@ -12,10 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -119,7 +117,8 @@ fun RecipeCard(recipe: Recipe, onClick: () -> Unit, viewModel: RecipeViewModel) 
                     contentDescription = if (recipe.isSaved) "Unfavorite" else "Favorite",
                     modifier = Modifier
                         .size(24.dp)
-                        .background(Color.Transparent)
+                        .background(Color.Transparent),
+                    tint = if (isSaved) Color.Red else Color.Black
                 )
             }
 
